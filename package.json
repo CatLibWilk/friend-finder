@@ -1,0 +1,25 @@
+{
+  "name": "friend-finder",
+  "version": "1.0.0",
+  "description": "Node app for survey and personality-matching.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatLibWilk/friend-finder.git"
+  },
+  "author": "Andrew Wilk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatLibWilk/friend-finder/issues"
+  },
+  "homepage": "https://github.com/CatLibWilk/friend-finder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  }
+}
