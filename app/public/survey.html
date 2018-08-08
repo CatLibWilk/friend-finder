@@ -38,7 +38,7 @@
                     
                     <h3><strong>Question 2</strong></h3>
                     <h4>I have a vivid imagination.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-2" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -49,7 +49,7 @@
 
                     <h3><strong>Question 3</strong></h3>
                     <h4>I worry about things.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-3" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -60,7 +60,7 @@
 
                     <h3><strong>Question 4</strong></h3>
                     <h4>I love large parties.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-4" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -71,7 +71,7 @@
 
                     <h3><strong>Question 5</strong></h3>
                     <h4>I believe in the importance of art.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-5" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -82,7 +82,7 @@
 
                     <h3><strong>Question 6</strong></h3>
                     <h4>I'm hot-tempered.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-6" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -93,7 +93,7 @@
 
                     <h3><strong>Question 7</strong></h3>
                     <h4>I take charge.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-7" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -104,7 +104,7 @@
 
                     <h3><strong>Question 8</strong></h3>
                     <h4>I experience my emotions intensely.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-8" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -115,7 +115,7 @@
 
                     <h3><strong>Question 9</strong></h3>
                     <h4>I generally prefer to spend quiet evenings at home.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-9" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -126,7 +126,7 @@
 
                     <h3><strong>Question 10</strong></h3>
                     <h4>I always try to stay busy.</h4>
-                    <select id="q-1" class="form-control form-control-sm">
+                    <select id="q-10" class="form-control form-control-sm">
                         <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -135,13 +135,41 @@
                         <option value="5">5 (Strongly Agree)</option>
                     </select>
 
-                    <button type="button" class="btn mt-3 text-white mb-3 bg-primary btn-link col-12">Find a Friend!</button>
+                    <button type="button" id="sub-btn" class="btn mt-3 text-white mb-3 bg-primary btn-link col-12">Find a Friend!</button>
 
                 </section><!--end questions section-->
                 
             </div><!--container-fluid end-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script src="script.js"></script> -->
-                          
+        <script>
+        var userObj = {};
+        var userScores = [];
+        var subBtn = $("#sub-btn");
+
+        subBtn.on("click", (e) => {
+                e.preventDefault();
+                var userName = $("#name").val().trim();
+                var userPhoto = $("#photo").val().trim();
+
+                var q1 = parseInt($("#q-1").val());
+                var q2 = parseInt($("#q-2").val());
+                var q3 = parseInt($("#q-3").val());
+                var q4 = parseInt($("#q-4").val());
+                var q5 = parseInt($("#q-5").val());
+                var q6 = parseInt($("#q-6").val());
+                var q7 = parseInt($("#q-7").val());
+                var q8 = parseInt($("#q-8").val());
+                var q9 = parseInt($("#q-9").val());
+                var q10 = parseInt($("#q-10").val());
+
+                userScores.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+                userObj.name = userName;
+                userObj.photo = userPhoto;
+                userObj.scores = userScores;
+
+                $.post("////", f)
+        });
+        </script>                
        </body>
     </html>

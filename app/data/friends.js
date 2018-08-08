@@ -1,6 +1,6 @@
 var tony = {
     "name": "Tony",
-    "photo": "",
+    "photo": "https://i.imgur.com/xiu66nq.jpg",
     "scores": [
         3,
         3,
@@ -16,7 +16,7 @@ var tony = {
 }
 var tiny = {
     "name": "Tiny",
-    "photo": "",
+    "photo": "https://i.imgur.com/yfpnTxB.jpg",
     "scores": [
         5,
         5,
@@ -32,7 +32,7 @@ var tiny = {
 }
 var ricky = {
     "name": "Ricky",
-    "photo": "",
+    "photo": "https://i.imgur.com/ahTF5LS.jpg?1",
     "scores": [
         3,
         3,
@@ -48,7 +48,7 @@ var ricky = {
 }
 var ticky = {
     "name": "Ticky",
-    "photo": "",
+    "photo": "https://i.imgur.com/90Xfqej.jpg",
     "scores": [
         2,
         1,
@@ -64,7 +64,7 @@ var ticky = {
 }
 var fernando = {
     "name": "Fernando",
-    "photo": "",
+    "photo": "https://i.imgur.com/wRoPg7h.jpg",
     "scores": [
         2,
         3,
