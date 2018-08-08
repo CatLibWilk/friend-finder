@@ -138,9 +138,24 @@
                     <button type="button" id="sub-btn" class="btn mt-3 text-white mb-3 bg-primary btn-link col-12">Find a Friend!</button>
 
                 </section><!--end questions section-->
-                
-            </div><!--container-fluid end-->
+                <section>
+                <div class="modal" id="bestMatchDiv">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                               <h2 class="modal-title"><i class="fas fa-exclamation"></i>Your new best friend!</h2><div id="ex" class="btn btn-danger" href="/home">X</div >
+                                
+                            </div><!--End modal header-->
+                            <div class="modal-body">
+                                
+                            </div><!--End modal body-->
+                        </div><!--End modal content-->
+                    </div><!--End modal-dialog-->
+                  </div> <!--End modal container div-->
+                <!--end bestmatch modal
+                </section><!-end modal section-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
         <script>
         var userObj = {};
@@ -170,7 +185,17 @@
 
                 $.post("/api/friends", userObj, data => {
                     console.log(data)
+                    var newDiv = $("<div>");
+                    var newH1 = $("<h1>").text(data[0].name);
+                    var newImg = $("<img class='img-fluid'>").attr("src", data[0].photo);
+                    newDiv.append(newH1, newImg);
+                    $(".modal-body").append(newDiv);
+                    $("#bestMatchDiv").modal({ show: true});
                 });
+        });
+        $("#ex").on("click", (e) => {
+           e.preventDefault();
+           $("#bestMatchDiv").modal("hide");
         });
         </script>                
        </body>
