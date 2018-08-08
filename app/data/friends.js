@@ -86,3 +86,5 @@ var compArray = [
     ticky,
     fernando
 ]
+
+module.exports = compArray;

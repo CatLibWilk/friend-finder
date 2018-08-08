@@ -168,7 +168,9 @@
                 userObj.photo = userPhoto;
                 userObj.scores = userScores;
 
-                $.post("////", f)
+                $.post("/api/friends", userObj, data => {
+                    console.log(data)
+                });
         });
         </script>                
        </body>
