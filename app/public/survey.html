@@ -157,7 +157,8 @@
                     <button type="button" id="sub-btn" class="btn mt-3 text-white mb-3 bg-primary btn-link col-12">Find a Friend!</button>
 
                 </section><!--end questions section-->
-                <section>
+                
+                <section><!--modals-->
                 <div class="modal" id="bestMatchDiv">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -171,8 +172,24 @@
                         </div><!--End modal content-->
                     </div><!--End modal-dialog-->
                   </div> <!--End modal container div-->
-                <!--end bestmatch modal
-                </section><!-end modal section-->
+                <!--end bestmatch modal-->
+
+                <div class="modal" id="errorDiv">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                               <h2 class="modal-title"><i class="fas fa-exclamation"></i>User Error!</h2><div id="err-ex" class="btn btn-danger" href="/home">X</div >
+                                
+                            </div><!--End modal header-->
+                            <div class="modal-body">
+                                
+                            </div><!--End modal body-->
+                        </div><!--End modal content-->
+                    </div><!--End modal-dialog-->
+                  </div> <!--End modal container div-->
+                <!--end error modal-->
+
+                </section><!--end modal section-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
@@ -199,13 +216,22 @@
 
                 var numCheck = [];
                 var blankCounter = 0;
+
                 valuesCheck();
 
                 function valuesCheck(){
                     numCheck.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+                    function errorShow(){
+                                    $(".modal-body").empty();
+                                    var errorH1 = $("<h1>").text("Sorry, you appear to have left one or more questions unanswered. Please review the survey.");
+                                    $(".modal-body").append(errorH1);
+                                    $("#errorDiv").modal({ show: true});
+                                }
+                            
                     numCheck.forEach(number => {
                         if(isNaN(number)){
                             console.log("you've left some blank");
+                                
                             blankCounter++;
                         };
                     
@@ -214,42 +240,45 @@
                         packageBuild()
                     }else{
                         console.log("Please review the form and make sure you've filled out all the fields");
+                        errorShow();
                     }
                 };
 
                 function packageBuild(){
                 
+                    userScores.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+                    userObj.name = userName;
+                    userObj.photo = userPhoto;
+                    userObj.scores = userScores;
 
-                userScores.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
-                userObj.name = userName;
-                userObj.photo = userPhoto;
-                userObj.scores = userScores;
-
-                $.post("/api/friends", userObj, data => {
-
-                    var newDiv = $("<div>");
-                    var newH1 = $("<h1>").text(data[0].name);
-                    var newImg = $("<img class='img-fluid'>").attr("src", data[0].photo);
-                    newDiv.append(newH1, newImg);
-                    $(".modal-body").append(newDiv);
+                    $.post("/api/friends", userObj, data => {
+                        $(".modal-body").empty();
+                        var newDiv = $("<div>");
+                        var newH1 = $("<h1>").text(data[0].name);
+                        var newImg = $("<img class='img-fluid'>").attr("src", data[0].photo);
+                        newDiv.append(newH1, newImg);
+                        $(".modal-body").append(newDiv);
 
 
-                    let fade = new Promise( (resolve, reject) => {
-                        resolve($("#bestMatchDiv").fadeIn(450))
+                        let fade = new Promise( (resolve, reject) => {
+                            resolve($("#bestMatchDiv").fadeIn(450))
+                        });
+
+                        let freeze = new Promise( (resolve, reject) => {
+                            resolve($("#bestMatchDiv").modal({ show: true}));
+                        });
+
+                        fade().then(freeze);
+                        
                     });
-
-                    let freeze = new Promise( (resolve, reject) => {
-                        resolve($("#bestMatchDiv").modal({ show: true}));
-                    });
-
-                    fade().then(freeze);
-                    
-                });
             };
         });
+
+
         $("#ex").on("click", (e) => {
             e.preventDefault();
-            
+    
+
             $("#bestMatchDiv").delay(500).fadeOut(450);
 
             setTimeout(closeModal, 1000);
@@ -268,7 +297,12 @@
                 }
 
             $(".opaque").attr("id", "opaque");
+            
         });
-        </script>                
+        $("#err-ex").on("click", (e) => {
+
+            $("#errorDiv").modal("hide");
+        });
+       </script>                
        </body>
     </html>
