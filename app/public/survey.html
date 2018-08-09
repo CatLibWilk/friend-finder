@@ -197,6 +197,29 @@
                 var q9 = parseInt($("#q-9").val());
                 var q10 = parseInt($("#q-10").val());
 
+                var numCheck = [];
+                var blankCounter = 0;
+                valuesCheck();
+
+                function valuesCheck(){
+                    numCheck.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+                    numCheck.forEach(number => {
+                        if(isNaN(number)){
+                            console.log("you've left some blank");
+                            blankCounter++;
+                        };
+                    
+                    });
+                    if(blankCounter === 0 && userName !== "" && userPhoto !== ""){
+                        packageBuild()
+                    }else{
+                        console.log("Please review the form and make sure you've filled out all the fields");
+                    }
+                };
+
+                function packageBuild(){
+                
+
                 userScores.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
                 userObj.name = userName;
                 userObj.photo = userPhoto;
@@ -222,6 +245,7 @@
                     fade().then(freeze);
                     
                 });
+            };
         });
         $("#ex").on("click", (e) => {
             e.preventDefault();
