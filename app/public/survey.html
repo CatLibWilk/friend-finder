@@ -203,13 +203,13 @@
                 userObj.scores = userScores;
 
                 $.post("/api/friends", userObj, data => {
-                    console.log(data)
+
                     var newDiv = $("<div>");
                     var newH1 = $("<h1>").text(data[0].name);
                     var newImg = $("<img class='img-fluid'>").attr("src", data[0].photo);
                     newDiv.append(newH1, newImg);
                     $(".modal-body").append(newDiv);
-                    // $("#bestMatchDiv").modal({ show: true});
+
 
                     let fade = new Promise( (resolve, reject) => {
                         resolve($("#bestMatchDiv").fadeIn(450))
@@ -236,7 +236,11 @@
                 };
 
                 function resetPage(){
-                    
+
+                    $.post("/close", data => {
+                        var currentURL = window.location.origin;
+                        window.location.assign(`${currentURL}${data}`);
+                    });
                 }
 
             $(".opaque").attr("id", "opaque");

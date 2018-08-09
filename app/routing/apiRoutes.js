@@ -34,15 +34,21 @@ module.exports = function(app) {
                 }
                 return -1
             });
-            console.log(matches[0]);
+
             var bestMatch = friendsArray.filter( friend => {
                 if(friend.name === matches[0].name){
                     return true
                 }
             });
-            console.log(bestMatch)
+
             res.json(bestMatch);
     });
 
+    app.post("/close", function(req, res) {
+
+        
+        res.send("/");
+  
+    });
 };
 
